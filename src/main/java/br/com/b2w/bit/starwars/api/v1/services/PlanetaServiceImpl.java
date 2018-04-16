@@ -25,11 +25,7 @@ public class PlanetaServiceImpl implements PlanetaService {
 	public List<Planeta> list(String nome) {
 		List<Planeta> planetas = new ArrayList<>();
 
-		if (Strings.isBlank(nome)) {
-			planetaRepository.findAll().forEach(planetas::add);
-		} else {
-			planetaRepository.findByNomeIgnoreCase(nome).forEach(planetas::add);
-		}
+		planetaRepository.list(nome).forEach(planetas::add);
 
 		if (planetas.size() == 0) {
 			throw new PlanetaNotFoundException();
