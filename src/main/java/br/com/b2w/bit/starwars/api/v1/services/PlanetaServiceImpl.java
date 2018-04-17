@@ -3,12 +3,12 @@ package br.com.b2w.bit.starwars.api.v1.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.b2w.bit.starwars.api.v1.exceptions.PlanetaNotFoundException;
 import br.com.b2w.bit.starwars.api.v1.models.Planeta;
+import br.com.b2w.bit.starwars.api.v1.param.PlanetaParam;
 import br.com.b2w.bit.starwars.api.v1.repositories.PlanetaRepository;
 
 @Service
@@ -22,10 +22,10 @@ public class PlanetaServiceImpl implements PlanetaService {
 	}
 
 	@Override
-	public List<Planeta> list(String nome) {
+	public List<Planeta> list(PlanetaParam planetaParam) {
 		List<Planeta> planetas = new ArrayList<>();
 
-		planetaRepository.list(nome).forEach(planetas::add);
+		planetaRepository.list(planetaParam).forEach(planetas::add);
 
 		if (planetas.size() == 0) {
 			throw new PlanetaNotFoundException();

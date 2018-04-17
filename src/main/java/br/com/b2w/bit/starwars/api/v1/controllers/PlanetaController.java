@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.b2w.bit.starwars.api.v1.commands.PlanetaDTO;
 import br.com.b2w.bit.starwars.api.v1.converters.PlanetaDTOToPlaneta;
 import br.com.b2w.bit.starwars.api.v1.converters.PlanetaToPlanetaDTO;
+import br.com.b2w.bit.starwars.api.v1.integration.PlanetaClient;
+import br.com.b2w.bit.starwars.api.v1.integration.SWClient;
+import br.com.b2w.bit.starwars.api.v1.param.PlanetaParam;
 import br.com.b2w.bit.starwars.api.v1.services.PlanetaService;
+import feign.Feign;
 
 @RestController
 @RequestMapping(PlanetaController.BASE_URL)
@@ -50,6 +53,10 @@ public class PlanetaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void save(@Valid @RequestBody PlanetaDTO planetaDTO) {
+		SWClient client = Feign.builder().target(SWClient.class, "https://swapi.co/api/planets/?search={nome}");
+		
+		PlanetaClient buscaPlanetaByName = client.buscaPlanetaByName(planetaDTO.getNome());
+		
 		planetaService.save(planetaDTOToPlaneta.convert(planetaDTO));
 	}
 
@@ -61,8 +68,8 @@ public class PlanetaController {
 
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)
-	public List<PlanetaDTO> list(@RequestParam(value = "nome", required = false) String nome) {
-		return planetaService.list(nome).stream().map(planeta -> {
+	public List<PlanetaDTO> list(PlanetaParam planetaParam) {
+		return planetaService.list(planetaParam).stream().map(planeta -> {
 			return planetaToPlanetaDTO.convert(planeta);
 		}).collect(Collectors.toList());
 	}

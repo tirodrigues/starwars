@@ -1,7 +1,5 @@
 package br.com.b2w.bit.starwars.api.v1.repositories;
 
-import java.util.List;
-
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -9,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import br.com.b2w.bit.starwars.api.v1.models.Planeta;
+import br.com.b2w.bit.starwars.api.v1.param.PlanetaParam;
 
 public class PlanetaRepositoryImpl implements PlanetaRepositoryCustom {
 
@@ -20,12 +19,11 @@ public class PlanetaRepositoryImpl implements PlanetaRepositoryCustom {
 	}
 
 	@Override
-	public Iterable<Planeta> list(String nome) {
+	public Iterable<Planeta> list(PlanetaParam planetaParam) {
 		Query query = new Query();
-		if(!Strings.isBlank(nome)) {
-			query.addCriteria(Criteria.where("nome").regex(nome, "i"));
+		if(!Strings.isBlank(planetaParam.getNome())) {
+			query.addCriteria(Criteria.where("nome").regex(planetaParam.getNome(), "i"));
 		}
-		List<Planeta> planetas = mongoTemplate.find(query, Planeta.class);
-		return planetas;
+		return mongoTemplate.find(query, Planeta.class);
 	}
 }

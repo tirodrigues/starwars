@@ -62,7 +62,7 @@ public class PlanetaControllerTest {
 
         List<Planeta> planetas = Arrays.asList(planeta1, planeta2);
 
-        when(planetaService.list(anyString())).thenReturn(planetas);
+        //when(planetaService.list(anyString())).thenReturn(planetas);
 
         mockMvc.perform(get(PlanetaController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON))

@@ -5,11 +5,13 @@ import javax.validation.constraints.NotBlank;
 public class PlanetaDTO {
 
 	private String id;
-	
+
 	@NotBlank
 	private String nome;
+
 	@NotBlank
 	private String clima;
+
 	@NotBlank
 	private String terreno;
 

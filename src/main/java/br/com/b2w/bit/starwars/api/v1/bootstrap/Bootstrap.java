@@ -12,26 +12,25 @@ public class Bootstrap implements CommandLineRunner {
 
 	@Autowired
 	private PlanetaRepository planetaRepository;
-	
+
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		System.out.println("Deletando todo mundo deleteAll():");
 		planetaRepository.deleteAll();
-		
-		//save planeta
+
+		// save planeta
 		Planeta planeta = new Planeta();
 		planeta.setNome("XYZ");
 		planeta.setClima("Chuvoso");
 		planeta.setTerreno("Gelido");
-		
-		Planeta planeta2 = new Planeta();
-		planeta2.setNome("ZZZ");
-		planeta2.setClima("111");
-		planeta2.setTerreno("333");
-		
-		planetaRepository.save(planeta);
-		
-	}
 
+		Planeta planeta2 = new Planeta();
+		planeta2.setNome("Krypton");
+		planeta2.setClima("Chuvoso");
+		planeta2.setTerreno("Arenoso");
+
+		planetaRepository.save(planeta);
+		planetaRepository.save(planeta2);
+	}
 }
