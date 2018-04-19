@@ -19,7 +19,7 @@ public class SwaggerConfig {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage(PlanetaController.class.getPackage().getName()))
-				.paths(PathSelectors.regex("api/planeta.*")).build();
+				.paths(PathSelectors.regex("/api/v1/planeta.*")).build();
 	}
 
 }

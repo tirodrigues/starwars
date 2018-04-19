@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import br.com.b2w.bit.starwars.api.v1.integration.StarWarsIntegration;
 import br.com.b2w.bit.starwars.api.v1.param.PlanetaParam;
 import br.com.b2w.bit.starwars.api.v1.services.PlanetaService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @Api("API REST Planetas")
 @RestController
@@ -55,7 +53,6 @@ public class PlanetaController {
 		return planetaToPlanetaDTO.convert(planetaService.getById(id));
 	}
 
-	@ApiOperation("")
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public void save(@Valid @RequestBody PlanetaDTO planetaDTO) {
@@ -64,7 +61,6 @@ public class PlanetaController {
 		planetaService.save(planetaDTOToPlaneta.convert(planetaDTO));
 	}
 
-	@ApiOperation("")
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable String id) {
