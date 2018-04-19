@@ -1,13 +1,18 @@
 package br.com.b2w.bit.starwars.api.v1.integration;
 
-public class PlanetaClient {
+import java.io.Serializable;
+import java.util.List;
+
+public class PlanetaIntegration implements Serializable {
+
+	private static final long serialVersionUID = 3847652007562661697L;
 	
 	private String edited;
-	private String[] starships;
-	private String[] species;
+	private List<String> starships;
+	private List<String> species;
 	private String skin_color;
 	private String eye_color;
-	private String[] films;
+	private List<String> films;
 	private String birth_year;
 	private String url;
 	private String mass;
@@ -27,19 +32,19 @@ public class PlanetaClient {
 		this.edited = edited;
 	}
 
-	public String[] getStarships() {
+	public List<String> getStarships() {
 		return starships;
 	}
 
-	public void setStarships(String[] starships) {
+	public void setStarships(List<String> starships) {
 		this.starships = starships;
 	}
 
-	public String[] getSpecies() {
+	public List<String> getSpecies() {
 		return species;
 	}
 
-	public void setSpecies(String[] species) {
+	public void setSpecies(List<String> species) {
 		this.species = species;
 	}
 
@@ -59,11 +64,11 @@ public class PlanetaClient {
 		this.eye_color = eye_color;
 	}
 
-	public String[] getFilms() {
+	public List<String> getFilms() {
 		return films;
 	}
 
-	public void setFilms(String[] films) {
+	public void setFilms(List<String> films) {
 		this.films = films;
 	}
 

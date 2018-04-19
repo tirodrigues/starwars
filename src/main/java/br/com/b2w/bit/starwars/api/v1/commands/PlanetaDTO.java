@@ -15,6 +15,8 @@ public class PlanetaDTO {
 	@NotBlank
 	private String terreno;
 
+	private Long quantidadeFilmes;
+
 	public String getId() {
 		return id;
 	}
@@ -45,5 +47,13 @@ public class PlanetaDTO {
 
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
+	}
+
+	public Long getQuantidadeFilmes() {
+		return quantidadeFilmes;
+	}
+
+	public void setQuantidadeFilmes(Long quantidadeFilmes) {
+		this.quantidadeFilmes = quantidadeFilmes;
 	}
 }

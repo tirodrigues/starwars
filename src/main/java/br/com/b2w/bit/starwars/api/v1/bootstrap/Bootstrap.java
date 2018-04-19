@@ -24,11 +24,13 @@ public class Bootstrap implements CommandLineRunner {
 		planeta.setNome("XYZ");
 		planeta.setClima("Chuvoso");
 		planeta.setTerreno("Gelido");
+		planeta.setQuantidadeFilmes(2L);
 
 		Planeta planeta2 = new Planeta();
 		planeta2.setNome("Krypton");
 		planeta2.setClima("Chuvoso");
 		planeta2.setTerreno("Arenoso");
+		planeta2.setQuantidadeFilmes(1L);
 
 		planetaRepository.save(planeta);
 		planetaRepository.save(planeta2);

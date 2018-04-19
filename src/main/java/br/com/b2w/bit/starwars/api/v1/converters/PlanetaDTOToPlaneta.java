@@ -20,6 +20,7 @@ public class PlanetaDTOToPlaneta implements Converter<PlanetaDTO, Planeta> {
 		planeta.setNome(planetaDTO.getNome());
 		planeta.setTerreno(planetaDTO.getTerreno());
 		planeta.setClima(planetaDTO.getClima());
+		planeta.setQuantidadeFilmes(planetaDTO.getQuantidadeFilmes());
 		return planeta;
 	}
 }
