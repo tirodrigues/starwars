@@ -9,4 +9,8 @@ public class PlanetaParamBean implements PlanetaParam {
 		return this.nome;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 }

@@ -1,7 +1,6 @@
 package br.com.b2w.bit.starwars.api.v1.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.b2w.bit.starwars.api.v1.commands.PlanetaDTO;
 import br.com.b2w.bit.starwars.api.v1.converters.PlanetaDTOToPlaneta;
-import br.com.b2w.bit.starwars.api.v1.converters.PlanetaToPlanetaDTO;
 import br.com.b2w.bit.starwars.api.v1.integration.StarWarsIntegration;
 import br.com.b2w.bit.starwars.api.v1.param.PlanetaParam;
 import br.com.b2w.bit.starwars.api.v1.services.PlanetaService;
@@ -32,17 +30,14 @@ public class PlanetaController {
 	public static final String BASE_URL = "/api/v1/planeta";
 
 	private final PlanetaService planetaService;
-	private final PlanetaToPlanetaDTO planetaToPlanetaDTO;
 	private final PlanetaDTOToPlaneta planetaDTOToPlaneta;
 	private final StarWarsIntegration starWarsIntegration;
 
 	@Autowired
 	public PlanetaController(PlanetaService planetaService, 
-							 PlanetaToPlanetaDTO planetaToPlanetaDTO,
 							 PlanetaDTOToPlaneta planetaDTOToPlaneta,
 							 StarWarsIntegration starWarsIntegration) {
 		this.planetaService = planetaService;
-		this.planetaToPlanetaDTO = planetaToPlanetaDTO;
 		this.planetaDTOToPlaneta = planetaDTOToPlaneta;
 		this.starWarsIntegration = starWarsIntegration;
 	}
@@ -50,19 +45,19 @@ public class PlanetaController {
 	@GetMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public PlanetaDTO getById(@PathVariable String id) {
-		return planetaToPlanetaDTO.convert(planetaService.getById(id));
+		return planetaService.getById(id);
 	}
 
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public void save(@Valid @RequestBody PlanetaDTO planetaDTO) {
+	public PlanetaDTO save(@Valid @RequestBody PlanetaDTO planetaDTO) {
 		Long quantidadeDeFilmes = starWarsIntegration.bucaQuantidadeDeFilmes(planetaDTO.getNome());
 		planetaDTO.setQuantidadeFilmes(quantidadeDeFilmes);
-		planetaService.save(planetaDTOToPlaneta.convert(planetaDTO));
+		return planetaService.save(planetaDTOToPlaneta.convert(planetaDTO));
 	}
 
 	@DeleteMapping("{id}")
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable String id) {
 		planetaService.delete(id);
 	}
@@ -70,8 +65,6 @@ public class PlanetaController {
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)
 	public List<PlanetaDTO> list(PlanetaParam planetaParam) {
-		return planetaService.list(planetaParam).stream().map(planeta -> {
-			return planetaToPlanetaDTO.convert(planeta);
-		}).collect(Collectors.toList());
+		return planetaService.list(planetaParam);
 	}
 }
