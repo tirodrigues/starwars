@@ -17,8 +17,8 @@ Executar: ``` mvn package && java -jar target/starwars-1.0.0.jar ```
 
 ## RUN DOCKER
 
-Executar: ``` mvn clean install``` para o build da imagem
-Executar: ``` docker-compose up``` para subir os containers
+Executar: ``` mvn clean install``` para o build da imagem <br/>
+Executar: ``` docker-compose up``` para subir os containers <br/>
 
 ## Contexto
 Api fica disponível em http://localhost:8080/api/v1/planeta
