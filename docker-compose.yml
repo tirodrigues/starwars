@@ -2,12 +2,12 @@ version: "3"
 services:
   mongo:
     image: mongo:3.2.4
+    container_name: mongoserver
     ports:
     - 27017:27017
     networks:
       - intra-network
     
-# APP  ***************************************************************************************
   spring-boot-mongo-docker:
     image: tirodrigues/starwars
     ports:
