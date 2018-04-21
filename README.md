@@ -3,20 +3,19 @@ API REST para cadastro de planetas desafio B2W.
 
 ## Tecnologias
 
-Java 8
-Maven
-Spring Boot
-Docker
-Docker Compose
-MongoDB
-
+Java 8 <br/>
+Maven <br/>
+Spring Boot <br/>
+Docker <br/>
+Docker Compose <br/>
+MongoDB <br/>
+ 
 ## RUN MAVEN
-Com o banco devidamento configurado em "/starwars/src/main/resources.application.properties"
+Com o banco devidamento configurado em "starwars/src/main/resources.application.properties"
 
 Executar: ``` mvn package && java -jar target/starwars-1.0.0.jar ```
 
 ## RUN DOCKER
-Com o banco devidamento configurado em "/starwars/src/main/resources.application.properties"
 
 Executar: ``` mvn clean install``` para o build da imagem
 Executar: ``` docker-compose up``` para subir os containers
